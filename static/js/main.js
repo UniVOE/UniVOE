@@ -71,77 +71,76 @@
   }
 
   /* A group of videos that play in sync.
-     - Sources are attached only while the group is near the viewport and detached when it
-       leaves, so the browser never loads or decodes more than a few clips at a time.
-     - Playback starts only once every clip can play, all from frame 0, so panels stay aligned.
-     - setSources() swaps the clips; onCycle() is called each time every clip has reached its
-       end (return false if it switched clips itself). */
+     - Sources (and posters) are attached only while the group is near the viewport and
+       detached when it leaves, so the browser only downloads / decodes what is on screen.
+     - Each clip starts as soon as it alone can play (no waiting for slow siblings on a slow
+       connection); once every clip is ready they all jump back to frame 0 together, and
+       afterwards the group restarts together each time every clip has reached its end.
+     - setSources() swaps the clips; onCycle() is called each time every clip has ended
+       (return false if it switched clips itself). */
   function SyncGroup(videos, onCycle) {
     var self = this;
     self.videos = videos;
     self.srcs = [];
     self.visible = false;
-    self.token = 0;
+    self.synced = false;
     videos.forEach(function (v) {
+      v.addEventListener("canplay", function () { self.onReady(v); });
       v.addEventListener("ended", function () {
         if (!videos.every(function (x) { return x.ended; })) return;
         if (onCycle && onCycle() === false) return;
-        self.playTogether();
+        self.restartAll();
       });
     });
   }
   SyncGroup.prototype.setSources = function (srcs) {
     this.srcs = srcs;
-    this.videos.forEach(function (v, i) { v.poster = posterOf(srcs[i]); });
     if (this.visible) this.attach();
   };
   SyncGroup.prototype.attach = function () {
-    var srcs = this.srcs;
-    this.videos.forEach(function (v, i) {
+    var srcs = this.srcs, self = this;
+    self.videos.forEach(function (v, i) {
       if (v.getAttribute("src") !== srcs[i]) {
+        self.synced = false;
         v.pause();
+        v.poster = posterOf(srcs[i]);
         v.preload = "auto";
         v.src = srcs[i];
         v.load();
       }
     });
-    this.playTogether();
+    if (self.synced) self.restartAll();
+    else self.videos.forEach(function (v) { if (v.readyState >= 3) self.onReady(v); });
   };
   SyncGroup.prototype.detach = function () {
-    this.token++;
+    this.synced = false;
     this.videos.forEach(function (v) {
       v.pause();
       if (v.hasAttribute("src")) {
-        v.removeAttribute("src");   // releases the decoder and the buffered data
+        v.removeAttribute("src");   // stops the download and releases the decoder
         v.load();
       }
     });
   };
-  SyncGroup.prototype.playTogether = function () {
-    var self = this, token = ++self.token, vids = self.videos;
-    if (!self.visible) return;
-    vids.forEach(function (v) { v.pause(); });
-    var ready = function () { return vids.every(function (v) { return v.readyState >= 3; }); };
-    var go = function () {
-      if (token !== self.token || !self.visible) return;
-      vids.forEach(function (v) {
-        try { v.currentTime = 0; } catch (e) { /* not seekable yet */ }
-        var p = v.play();
-        if (p && p.catch) p.catch(function () {});
-      });
-    };
-    if (ready()) { go(); return; }
-    var check = function () {
-      if (token !== self.token) {
-        vids.forEach(function (v) { v.removeEventListener("canplay", check); });
-        return;
-      }
-      if (!ready()) return;
-      vids.forEach(function (v) { v.removeEventListener("canplay", check); });
-      go();
-    };
-    vids.forEach(function (v) { v.addEventListener("canplay", check); });
+  SyncGroup.prototype.onReady = function (v) {
+    if (!this.visible || !v.hasAttribute("src")) return;
+    var all = this.videos.every(function (x) { return x.readyState >= 3; });
+    if (all && !this.synced) { this.synced = true; this.restartAll(); return; }
+    if (!this.synced && v.paused && !v.ended) play(v);   // show motion while siblings load
   };
+  SyncGroup.prototype.restartAll = function () {
+    if (!this.visible) return;
+    this.videos.forEach(function (v) {
+      if (!v.hasAttribute("src")) return;
+      try { v.currentTime = 0; } catch (e) { /* not seekable yet */ }
+      play(v);
+    });
+  };
+
+  function play(v) {
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  }
 
   // Attach (and play) groups only while they are near / on screen.
   var groups = new Map();
