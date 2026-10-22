@@ -4,7 +4,7 @@
     python tools/build_assets.py            # run from anywhere
 
 Reads  demo/  (raw results, not published) and writes
-  static/videos/...      H.264 copies with +faststart (stream copy, no re-encode, audio dropped),
+  static/videos/...      H.264 web encodes (CRF, see CRF below) with +faststart and no audio,
                          plus a first-frame poster <name>.jpg for each
   static/js/cases.js     case lists consumed by static/js/main.js (a <script>, so the page also
                          works when opened directly from disk via file://)
@@ -53,11 +53,18 @@ COMPARISON_DIRS = {"removal": "comprem", "injection": "compinj"}
 REQUIRED_METHODS = {"removal": {"sd2": "Security Interception"}}
 
 
+# Web encoding of the page videos. The raw results are 2-12 Mbit/s, which is far too heavy
+# for a page that plays up to 9 clips at once over slow links; CRF 26 is ~10-25x smaller and
+# visually indistinguishable at the sizes shown on the page.
+CRF = 26
+
+
 def copy_video(src: Path, dst: Path) -> str:
-    """Copy one video and write its first frame next to it as <name>.jpg (the poster that
-    the page shows until the video is loaded)."""
+    """Re-encode one video for the web and write its first frame next to it as <name>.jpg
+    (the poster that the page shows until the video is loaded)."""
     dst.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-c", "copy", "-an",
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-an",
+                    "-c:v", "libx264", "-preset", "slow", "-crf", str(CRF), "-pix_fmt", "yuv420p",
                     "-movflags", "+faststart", str(dst)], check=True)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-frames:v", "1", "-q:v", "5",
                     str(dst.with_suffix(".jpg"))], check=True)
