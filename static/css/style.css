@@ -29,11 +29,10 @@ a:hover { text-decoration: underline; }
 .authors a { color: var(--accent); }
 .affiliations { color: var(--muted); margin: 0; font-size: calc(1rem + 2px); }
 .affiliations span { display: inline-block; margin: 0 10px; }
-/* The logo row spans exactly the width of the affiliation line, so the first logo starts at
-   the left edge of "SECE, Peking University" and the row stays centred. */
 .affiliation-block { display: inline-flex; flex-direction: column; max-width: 100%; }
-.logos { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin: 18px 0 10px; }
-.logos img { height: 77px; width: auto; }
+/* logo row centred under the affiliations; the gap shrinks on narrow screens */
+.logos { display: flex; justify-content: center; align-items: center; gap: clamp(24px, 12vw, 165px); margin: 18px 0 10px; }
+.logos img { height: 85px; width: auto; }
 .note { color: var(--muted); font-size: .95rem; margin: 6px 0 24px; }
 .note span { display: inline-block; margin: 0 22px; }
 sup { font-size: .7em; }
