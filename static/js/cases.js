@@ -479,7 +479,7 @@ window.COMPARISON_CASES = {
   "injection": [
     {
       "id": "injection_01",
-      "prompt": "Place a man wearing a black t-shirt, brown shorts, and white sneakers, carrying a green backpack, walking up the stairs from the lower landing.",
+      "prompt": "Place a person in dark pants walking on the left treadmill and another person in dark pants walking on the right treadmill.",
       "input": "static/videos/comparison/injection/injection_01/input.mp4",
       "methods": [
         {
@@ -515,7 +515,7 @@ window.COMPARISON_CASES = {
     },
     {
       "id": "injection_02",
-      "prompt": "Place a person in dark pants walking on the left treadmill and another person in dark pants walking on the right treadmill.",
+      "prompt": "Place a man wearing a white t-shirt, light gray shorts, and black flip-flops walking on the concrete path, holding a phone in his right hand.",
       "input": "static/videos/comparison/injection/injection_02/input.mp4",
       "methods": [
         {
@@ -551,7 +551,7 @@ window.COMPARISON_CASES = {
     },
     {
       "id": "injection_03",
-      "prompt": "Place a man wearing a white t-shirt, light gray shorts, and black flip-flops walking on the concrete path, holding a phone in his right hand.",
+      "prompt": "Place a dark, abstract painting with red and white speckles inside the wooden-framed mirror, and add a white toilet visible in the lower half of the mirror reflection.",
       "input": "static/videos/comparison/injection/injection_03/input.mp4",
       "methods": [
         {
@@ -587,7 +587,7 @@ window.COMPARISON_CASES = {
     },
     {
       "id": "injection_04",
-      "prompt": "Place a dark, abstract painting with red and white speckles inside the wooden-framed mirror, and add a white toilet visible in the lower half of the mirror reflection.",
+      "prompt": "Place a person wearing a light blue hoodie, dark pants, and a black cap walking on the sidewalk from the right side of the frame towards the left.",
       "input": "static/videos/comparison/injection/injection_04/input.mp4",
       "methods": [
         {
@@ -623,20 +623,12 @@ window.COMPARISON_CASES = {
     },
     {
       "id": "injection_05",
-      "prompt": "Place a person wearing a light blue hoodie, dark pants, and a black cap walking on the sidewalk from the right side of the frame towards the left.",
+      "prompt": "Add a colorful parrot perched on the black handle of the spring rider in the center of the playground.",
       "input": "static/videos/comparison/injection/injection_05/input.mp4",
       "methods": [
         {
-          "name": "VideoPainter",
-          "video": "static/videos/comparison/injection/injection_05/videopainter.mp4"
-        },
-        {
           "name": "VACE",
           "video": "static/videos/comparison/injection/injection_05/vace.mp4"
-        },
-        {
-          "name": "UniVideo",
-          "video": "static/videos/comparison/injection/injection_05/univideo.mp4"
         },
         {
           "name": "Bernini",
@@ -655,11 +647,13 @@ window.COMPARISON_CASES = {
           "video": "static/videos/comparison/injection/injection_05/ours.mp4"
         }
       ],
-      "tags": []
+      "tags": [
+        "Long Video Editing"
+      ]
     },
     {
       "id": "injection_06",
-      "prompt": "Add a colorful parrot perched on the black handle of the spring rider in the center of the playground.",
+      "prompt": "Add a Monarch butterfly perched on an orange flower in the center of the bush.",
       "input": "static/videos/comparison/injection/injection_06/input.mp4",
       "methods": [
         {
@@ -681,36 +675,6 @@ window.COMPARISON_CASES = {
         {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/injection/injection_06/ours.mp4"
-        }
-      ],
-      "tags": [
-        "Long Video Editing"
-      ]
-    },
-    {
-      "id": "injection_07",
-      "prompt": "Add a Monarch butterfly perched on an orange flower in the center of the bush.",
-      "input": "static/videos/comparison/injection/injection_07/input.mp4",
-      "methods": [
-        {
-          "name": "VACE",
-          "video": "static/videos/comparison/injection/injection_07/vace.mp4"
-        },
-        {
-          "name": "Bernini",
-          "video": "static/videos/comparison/injection/injection_07/bernini.mp4"
-        },
-        {
-          "name": "Kling3.0-Omni",
-          "video": "static/videos/comparison/injection/injection_07/kling.mp4"
-        },
-        {
-          "name": "Seedance2.0",
-          "video": "static/videos/comparison/injection/injection_07/sd2.mp4"
-        },
-        {
-          "name": "UniVOE (Ours)",
-          "video": "static/videos/comparison/injection/injection_07/ours.mp4"
         }
       ],
       "tags": [
