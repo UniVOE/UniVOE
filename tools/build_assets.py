@@ -48,6 +48,17 @@ METHOD_NAMES = {
 METHOD_ORDER = ["videopainter", "vace", "univideo", "minimax", "effecterase",
                 "bernini", "kling", "sd2", "inpainting", "ours"]
 COMPARISON_DIRS = {"removal": "comprem", "injection": "compinj"}
+# Comparison case order: folders listed here come first in this order, the rest follow
+# alphabetically.
+COMPARISON_ORDER = {
+    "injection": ["REAL_ENV041_00002_001_01", "REAL_ENV172_00008_002_03", "REAL_ENV188_00009_001_03",
+                  "blender1", "real1", "long_inject_comp1", "long_inject_comp2"],
+}
+# Extra tags shown next to the instruction of a comparison case (folder name -> tags).
+COMPARISON_TAGS = {
+    "long_inject_comp1": ["Long Video Editing"],
+    "long_inject_comp2": ["Long Video Editing"],
+}
 # Demo case folders kept in demo/ but not shown on the page.
 DEMO_EXCLUDE = {
     "injection": {"REAL_ENV248_00113_003_01"},
@@ -111,7 +122,9 @@ def comparison_cases():
         if not root.is_dir():
             continue
         cases = []
-        for i, d in enumerate(sorted(p for p in root.iterdir() if p.is_dir()), 1):
+        order = COMPARISON_ORDER.get(task, [])
+        rank = lambda p: (order.index(p.name), "") if p.name in order else (len(order), p.name)
+        for i, d in enumerate(sorted((p for p in root.iterdir() if p.is_dir()), key=rank), 1):
             cid = f"{task}_{i:02d}"
             files = {p.stem.lower(): p for p in d.glob("*.mp4")}
             unknown = set(files) - set(METHOD_ORDER) - {"input", "gt", "ref"}
@@ -131,6 +144,7 @@ def comparison_cases():
                 "prompt": injection_instruction(prompt) if task == "injection" else prompt.strip(),
                 "input": copy_video(files["input"], OUT / "comparison" / task / cid / "input.mp4"),
                 "methods": methods,
+                "tags": COMPARISON_TAGS.get(d.name, []),
             })
         result[task] = cases
     return result

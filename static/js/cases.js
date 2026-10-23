@@ -272,7 +272,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/removal/removal_01/inpainting.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "removal_02",
@@ -311,7 +312,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/removal/removal_02/inpainting.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "removal_03",
@@ -350,7 +352,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/removal/removal_03/inpainting.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "removal_04",
@@ -389,7 +392,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/removal/removal_04/inpainting.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "removal_05",
@@ -428,7 +432,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/removal/removal_05/inpainting.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "removal_06",
@@ -467,7 +472,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/removal/removal_06/inpainting.mp4"
         }
-      ]
+      ],
+      "tags": []
     }
   ],
   "injection": [
@@ -504,7 +510,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/injection/injection_01/ours.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "injection_02",
@@ -539,7 +546,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/injection/injection_02/ours.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "injection_03",
@@ -574,7 +582,8 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/injection/injection_03/ours.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "injection_04",
@@ -609,16 +618,25 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/injection/injection_04/ours.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "injection_05",
-      "prompt": "Add a colorful parrot perched on the black handle of the spring rider in the center of the playground.",
+      "prompt": "Place a person wearing a light blue hoodie, dark pants, and a black cap walking on the sidewalk from the right side of the frame towards the left.",
       "input": "static/videos/comparison/injection/injection_05/input.mp4",
       "methods": [
         {
+          "name": "VideoPainter",
+          "video": "static/videos/comparison/injection/injection_05/videopainter.mp4"
+        },
+        {
           "name": "VACE",
           "video": "static/videos/comparison/injection/injection_05/vace.mp4"
+        },
+        {
+          "name": "UniVideo",
+          "video": "static/videos/comparison/injection/injection_05/univideo.mp4"
         },
         {
           "name": "Bernini",
@@ -636,11 +654,12 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/injection/injection_05/ours.mp4"
         }
-      ]
+      ],
+      "tags": []
     },
     {
       "id": "injection_06",
-      "prompt": "Add a Monarch butterfly perched on an orange flower in the center of the bush.",
+      "prompt": "Add a colorful parrot perched on the black handle of the spring rider in the center of the playground.",
       "input": "static/videos/comparison/injection/injection_06/input.mp4",
       "methods": [
         {
@@ -663,24 +682,19 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/injection/injection_06/ours.mp4"
         }
+      ],
+      "tags": [
+        "Long Video Editing"
       ]
     },
     {
       "id": "injection_07",
-      "prompt": "Place a person wearing a light blue hoodie, dark pants, and a black cap walking on the sidewalk from the right side of the frame towards the left.",
+      "prompt": "Add a Monarch butterfly perched on an orange flower in the center of the bush.",
       "input": "static/videos/comparison/injection/injection_07/input.mp4",
       "methods": [
         {
-          "name": "VideoPainter",
-          "video": "static/videos/comparison/injection/injection_07/videopainter.mp4"
-        },
-        {
           "name": "VACE",
           "video": "static/videos/comparison/injection/injection_07/vace.mp4"
-        },
-        {
-          "name": "UniVideo",
-          "video": "static/videos/comparison/injection/injection_07/univideo.mp4"
         },
         {
           "name": "Bernini",
@@ -698,6 +712,9 @@ window.COMPARISON_CASES = {
           "name": "UniVOE (Ours)",
           "video": "static/videos/comparison/injection/injection_07/ours.mp4"
         }
+      ],
+      "tags": [
+        "Long Video Editing"
       ]
     }
   ]

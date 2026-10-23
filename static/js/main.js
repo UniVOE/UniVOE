@@ -42,8 +42,9 @@
     return fig;
   }
 
-  function promptEl(text) {
+  function promptEl(text, tags) {
     var p = el("p", "prompt");
+    (tags || []).forEach(function (t) { p.appendChild(el("span", "prompt-label tag", t)); });
     p.appendChild(el("span", "prompt-label", "Instruction"));
     p.appendChild(document.createTextNode(text));
     return p;
@@ -280,7 +281,7 @@
       idx = (k + cases.length) % cases.length;
       var c = cases[idx];
       prompt.innerHTML = "";
-      prompt.appendChild(promptEl(c.prompt));
+      prompt.appendChild(promptEl(c.prompt, c.tags));
 
       var items = [{ name: "Input", video: c.input }].concat(c.methods);
       if (group) untrack(panels);

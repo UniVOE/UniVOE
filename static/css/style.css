@@ -29,8 +29,11 @@ a:hover { text-decoration: underline; }
 .authors a { color: var(--accent); }
 .affiliations { color: var(--muted); margin: 0; font-size: calc(1rem + 2px); }
 .affiliations span { display: inline-block; margin: 0 10px; }
-.logos { display: flex; justify-content: center; align-items: center; gap: 48px; margin: 18px 0 10px; }
-.logos img { height: 64px; width: auto; }
+/* The logo row spans exactly the width of the affiliation line, so the first logo starts at
+   the left edge of "SECE, Peking University" and the row stays centred. */
+.affiliation-block { display: inline-flex; flex-direction: column; max-width: 100%; }
+.logos { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin: 18px 0 10px; }
+.logos img { height: 77px; width: auto; }
 .note { color: var(--muted); font-size: .95rem; margin: 6px 0 24px; }
 .note span { display: inline-block; margin: 0 22px; }
 sup { font-size: .7em; }
@@ -48,7 +51,10 @@ sup { font-size: .7em; }
 .emoji { font-size: 1.1em; line-height: 1; }
 
 /* ---------- sections ---------- */
-main section { padding: 48px 24px 8px; }
+/* Space above each section title (Video Results / Comparison / Citation): 36px from the end
+   of the previous section. .container's padding would otherwise override the vertical padding. */
+main section.container { padding-top: 36px; padding-bottom: 0; }
+main section > :last-child { margin-bottom: 0; }
 h2 { font-size: 1.7rem; text-align: center; margin: 0 0 16px; }
 .abstract { text-align: justify; }
 .section-intro { text-align: center; color: var(--muted); max-width: 820px; margin: 0 auto 20px; }
@@ -68,6 +74,9 @@ h2 { font-size: 1.7rem; text-align: center; margin: 0 0 16px; }
 
 /* ---------- video cases ---------- */
 h3 { font-size: 1.3rem; text-align: center; margin: 36px 0 4px; }
+/* directly after a section intro (e.g. Comparison -> Object Removal) the gap is halved */
+#comparison .section-intro { margin-bottom: 0; }
+.section-intro + h3 { margin-top: 18px; }
 .sub-intro { text-align: center; color: var(--muted); font-size: .92rem; margin: 0 0 14px; }
 .case { background: var(--bg-soft); border-radius: var(--radius); padding: 14px; }
 .prompt { margin: 0 0 10px; font-size: .95rem; }
@@ -76,6 +85,7 @@ h3 { font-size: 1.3rem; text-align: center; margin: 36px 0 4px; }
   font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
   color: var(--accent); background: var(--accent-soft); border-radius: 4px;
 }
+.prompt-label.tag { color: #c2410c; background: #ffedd5; }
 .panels { display: grid; grid-template-columns: repeat(var(--cols, 2), 1fr); gap: 8px; }
 .panel { margin: 0; }
 .panel video {
