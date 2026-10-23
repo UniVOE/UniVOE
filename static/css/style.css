@@ -32,7 +32,7 @@ a:hover { text-decoration: underline; }
 .affiliation-block { display: inline-flex; flex-direction: column; max-width: 100%; }
 /* logo row centred under the affiliations; the gap shrinks on narrow screens */
 .logos { display: flex; justify-content: center; align-items: center; gap: clamp(24px, 12vw, 90px); margin: 18px 0 10px; }
-.logos img { height: 90px; width: auto; }
+.logos img { height: 80px; width: auto; }
 .note { color: var(--muted); font-size: .95rem; margin: 6px 0 24px; }
 .note span { display: inline-block; margin: 0 22px; }
 sup { font-size: .7em; }
