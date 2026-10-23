@@ -227,15 +227,9 @@ window.DEMO_CASES = {
     },
     {
       "id": "injection_24",
-      "prompt": "Place a man wearing a light blue hoodie, gray pants, and a black cap walking from left to right on the stone pavement in front of the building.",
+      "prompt": "Place a person wearing light gray sweatpants and white sneakers standing on the trampoline.",
       "input": "static/videos/injection/injection_24/input.mp4",
       "output": "static/videos/injection/injection_24/output.mp4"
-    },
-    {
-      "id": "injection_25",
-      "prompt": "Place a person wearing light gray sweatpants and white sneakers standing on the trampoline.",
-      "input": "static/videos/injection/injection_25/input.mp4",
-      "output": "static/videos/injection/injection_25/output.mp4"
     }
   ]
 };

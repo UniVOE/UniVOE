@@ -48,6 +48,10 @@ METHOD_NAMES = {
 METHOD_ORDER = ["videopainter", "vace", "univideo", "minimax", "effecterase",
                 "bernini", "kling", "sd2", "inpainting", "ours"]
 COMPARISON_DIRS = {"removal": "comprem", "injection": "compinj"}
+# Demo case folders kept in demo/ but not shown on the page.
+DEMO_EXCLUDE = {
+    "injection": {"REAL_ENV248_00113_003_01"},
+}
 # Methods every case of a task must show; a missing video becomes a black placeholder
 # box with this text (the provider refused to process the clip).
 REQUIRED_METHODS = {"removal": {"sd2": "Security Interception"}}
@@ -87,7 +91,8 @@ def demo_cases():
             "input": copy_video(d / "input.mp4", OUT / "removal" / cid / "input.mp4"),
             "output": copy_video(d / "output.mp4", OUT / "removal" / cid / "output.mp4"),
         })
-    inj = sorted(d for d in (DEMO / "injection").iterdir() if d.is_dir())
+    inj = sorted(d for d in (DEMO / "injection").iterdir()
+                 if d.is_dir() and d.name not in DEMO_EXCLUDE["injection"])
     for i, d in enumerate(inj, 1):
         cid = f"injection_{i:02d}"
         injection.append({
