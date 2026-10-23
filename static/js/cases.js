@@ -479,7 +479,7 @@ window.COMPARISON_CASES = {
   "injection": [
     {
       "id": "injection_01",
-      "prompt": "Place a person in dark pants walking on the left treadmill and another person in dark pants walking on the right treadmill.",
+      "prompt": "Place a man wearing a white t-shirt, light gray shorts, and black flip-flops walking on the concrete path, holding a phone in his right hand.",
       "input": "static/videos/comparison/injection/injection_01/input.mp4",
       "methods": [
         {
@@ -515,7 +515,7 @@ window.COMPARISON_CASES = {
     },
     {
       "id": "injection_02",
-      "prompt": "Place a man wearing a white t-shirt, light gray shorts, and black flip-flops walking on the concrete path, holding a phone in his right hand.",
+      "prompt": "Place a person in dark pants walking on the left treadmill and another person in dark pants walking on the right treadmill.",
       "input": "static/videos/comparison/injection/injection_02/input.mp4",
       "methods": [
         {

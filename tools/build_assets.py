@@ -51,7 +51,7 @@ COMPARISON_DIRS = {"removal": "comprem", "injection": "compinj"}
 # Comparison case order: folders listed here come first in this order, the rest follow
 # alphabetically. Folders in COMPARISON_EXCLUDE are not shown.
 COMPARISON_ORDER = {
-    "injection": ["REAL_ENV172_00008_002_03", "REAL_ENV188_00009_001_03", "blender1",
+    "injection": ["REAL_ENV188_00009_001_03", "REAL_ENV172_00008_002_03", "blender1",
                   "real1", "long_inject_comp1", "long_inject_comp2"],
 }
 COMPARISON_EXCLUDE = {
